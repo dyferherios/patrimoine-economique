@@ -9,6 +9,9 @@ class Possession{
     getLibelle() {
         return this.type.libelle;
     }
+    // get type() {
+    //     return this.type;
+    // }
 }
 
 module.exports = Possession;

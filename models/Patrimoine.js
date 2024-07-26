@@ -17,6 +17,10 @@ class Patrimoine {
         return this.possessions.reduce((sum, p) => (sum += p.getValuePerType()), 0)
     }
 
+    getAllValueInThisDate(date) {
+        return this.possessions.filter(p => p.date == date).reduce((sum, p) => (sum += p.getValuePerType()), 0);
+    }
+
     getPourcentage(libelle, annee, taux) {
         let tmp = this.possessions.filter(p => p.getLibelle() == libelle);
         annee = annee.split('-').map(e => parseInt(e));
@@ -46,11 +50,17 @@ class Patrimoine {
     }
 
     addPossession(possession) {
-        this.possessions.push(possession);
+        // console.log(possession.type);
+        if (possession.getLibelle() == "compte courant") {
+            // possession.getValuePerType() = possession.getValuePerType() - this.possessions.filter(p => p.type == "TrainDeVie").map(p => p.getValuePerType()).reduce((sum, i)=>(sum+=i),0);
+            this.possessions.push(possession);
+        } else {
+            this.possessions.push(possession);
+        }
     }
 
     removePossession(libelle) {
-        return this.possessions.filter(p => p.type.libelle != libelle)
+        this.possessions = this.possessions.filter(p => p.getLibelle() != libelle);
     }
 }
 
