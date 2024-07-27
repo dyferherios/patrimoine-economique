@@ -27,7 +27,7 @@ class Patrimoine {
         return (tmp[0].getValuePerType() * (taux/100)) * calculerInterval(annee, anneeDAjout);
     }
 
-    tauxDAmortissage(libelle, annee, taux) {
+    tauxDeDecroissement(libelle, annee, taux) {
         let tmp = this.possessions.filter(p => p.getLibelle() == libelle);
         for (let i = 0; i < this.possessions.length; i++) {
             if (tmp[0] == this.possessions[i]) {
@@ -36,7 +36,7 @@ class Patrimoine {
         }
     }
 
-    tauxDInteret(libelle,annee, taux) {
+    tauxDAcroissement(libelle,annee, taux) {
         let tmp = this.possessions.filter(p => p.getLibelle() == libelle);
         for (let i = 0; i < this.possessions.length; i++) {
             if (tmp[0] == this.possessions[i]) {

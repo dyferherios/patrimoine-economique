@@ -19,7 +19,7 @@ test.addPossession(possession3);
 
 // console.log(test.getAllActualValue());
 // console.log(test.getPourcentage("espèce", "2025-08-23", 2));
-// console.log(test.tauxDAmortissage("espèce", "2025-08-23", 2));
+// console.log(test.tauxDeDecroissement("espèce", "2025-08-23", 2));
 console.log(test.getAllActualValue());
 console.log(test.getAllValueInThisDate("2024-09-17"));
 // console.log(test.getPossessions("espèce"));
