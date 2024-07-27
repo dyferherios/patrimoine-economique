@@ -1,6 +1,6 @@
 class TrainDeVie{
-    constructor(type, value) {
-        this.type = type;
+    constructor(libelle, value) {
+        this.libelle = libelle;
         this.value = value;
     }
 }

@@ -4,5 +4,5 @@ class Argent{
         this.value = value;
     }
 }
-
+    
 module.exports = Argent;

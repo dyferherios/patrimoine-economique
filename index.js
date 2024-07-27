@@ -6,23 +6,25 @@ const TrainDeVie = require('./models/TrainDeVie');
 const arg0 = new Argent("espèce", 20000);
 const arg1 = new Argent("compte courant", 20000);
 const mat0 = new BienMateriel("ordinateur", 20000);
-const tdv0 = new TrainDeVie("louer", 20000);
+const tdv0 = new TrainDeVie("louer", 40000);
 const possession0 = new Possession("2024-09-17", arg0);
 const possession1 = new Possession("2024-09-17", arg1);
 const possession2 = new Possession("2020-08-09", mat0);
 const possession3 = new Possession("2020-08-09", tdv0);
 const test = new Patrimoine("rakoto");
 test.addPossession(possession0);
-test.addPossession(possession3);
 test.addPossession(possession2);
 test.addPossession(possession1);
+test.addPossession(possession3);
 
 // console.log(test.getAllActualValue());
 // console.log(test.getPourcentage("espèce", "2025-08-23", 2));
 // console.log(test.tauxDAmortissage("espèce", "2025-08-23", 2));
 console.log(test.getAllActualValue());
 console.log(test.getAllValueInThisDate("2024-09-17"));
-console.log(test);
 // console.log(test.getPossessions("espèce"));
 // test.removePossession("espèce")
 console.log(test);
+console.log(test.getAllActualValue());
+console.log(test.getPossessions("compte courant"));
+console.log(test.getPossessions("louer"));

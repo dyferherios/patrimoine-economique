@@ -6,15 +6,11 @@ class Patrimoine {
     }
 
     getPossessions(libelle) {
-        this.possessions.forEach(p => {
-            if (p.getLibelle() == libelle) {
-                console.log(p);
-            }
-        });
+        return this.possessions.filter(p => p.getLibelle() == libelle);
     }
 
     getAllActualValue() {
-        return this.possessions.reduce((sum, p) => (sum += p.getValuePerType()), 0)
+        return this.possessions.reduce((sum, p) => (sum += p.getValuePerType()), 0);
     }
 
     getAllValueInThisDate(date) {
@@ -50,18 +46,29 @@ class Patrimoine {
     }
 
     addPossession(possession) {
-        // console.log(possession.type);
+        this.possessions.push(possession);
         if (possession.getLibelle() == "compte courant") {
-            // possession.getValuePerType() = possession.getValuePerType() - this.possessions.filter(p => p.type == "TrainDeVie").map(p => p.getValuePerType()).reduce((sum, i)=>(sum+=i),0);
-            this.possessions.push(possession);
-        } else {
-            this.possessions.push(possession);
+            let poss = this.possessions.filter(p => p.type.constructor.name == "TrainDeVie");
+            const val = poss.map(p => p.getValuePerType()).reduce((sum, i) => (sum += i), 0);
+            this.possessions.filter(p => p.type.constructor.name == "TrainDeVie").map(p => p.type.value = 0);
+            possession.type.value = possession.getValuePerType() - val;
+        } else if(possession.type.constructor.name == "TrainDeVie") {
+            let poss = this.possessions.filter(p => p.getLibelle() == "compte courant");
+            if (poss[0].type.value - possession.getValuePerType() > 0) {
+                poss[0].type.value =  poss[0].type.value - possession.getValuePerType();
+                possession.type.value = 0;
+            } else {
+                this.removePossession(possession.getLibelle())
+                return "Vous ne pouvez pas payer cela, votre argent est insuffisant !!!!"
+            }
+            
         }
     }
 
     removePossession(libelle) {
         this.possessions = this.possessions.filter(p => p.getLibelle() != libelle);
     }
+
 }
 
 module.exports = Patrimoine;
