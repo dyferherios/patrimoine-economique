@@ -7,6 +7,7 @@
       "possessions": [
         {
           "possesseur": { "nom": "John Doe" },
+          "type":"BienMateriel",
           "libelle": "MacBook Pro",
           "valeur": 4000000,
           "dateDebut": "2023-12-25T00:00:00.000Z",
@@ -15,6 +16,7 @@
         },
         {
           "possesseur": { "nom": "John Doe" },
+          "type":"Flux",
           "libelle": "Alternance",
           "valeur": 0,
           "dateDebut": "2022-12-31T21:00:00.000Z",
@@ -25,6 +27,7 @@
         },
         {
           "possesseur": { "nom": "John Doe" },
+          "type":"Flux",
           "libelle": "Survie",
           "valeur": 0,
           "dateDebut": "2022-12-31T21:00:00.000Z",
@@ -35,6 +38,7 @@
         },
         {
           "possesseur": { "nom": "John Doe" },
+          "type":"BienMateriel",
           "libelle": "MacBook Pro",
           "valeur": 4000000,
           "dateDebut": "2023-12-25T00:00:00.000Z",
@@ -43,6 +47,7 @@
         },
         {
           "possesseur": { "nom": "John Doe" },
+          "type":"Flux",
           "libelle": "Alternance",
           "valeur": 0,
           "dateDebut": "2022-12-31T21:00:00.000Z",
@@ -53,6 +58,7 @@
         },
         {
           "possesseur": { "nom": "John Doe" },
+          "type":"Flux",
           "libelle": "Survie",
           "valeur": 0,
           "dateDebut": "2022-12-31T21:00:00.000Z",
