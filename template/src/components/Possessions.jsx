@@ -1,12 +1,11 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { Table } from 'react-bootstrap';
 import DateForm from './DateForm';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import Possession from "../../../models/possessions/Possession.js";
 import Flux from "../../../models/possessions/Flux.js";
-import { Link } from 'react-router-dom';
 import PossessionModal from './PossessionModal.jsx';
 
 const Possessions = () => {
@@ -15,6 +14,10 @@ const Possessions = () => {
     const [selectedDate, setSelectedDate] = useState(null);
 
     useEffect(() => {
+        fetchPossessions();
+    }, [nom]);
+
+    const fetchPossessions = () => {
         axios.get(`http://localhost:5000/possessions/${nom}`)
             .then(response => {
                 console.log('Fetched data:', response.data); // Vérifie la structure ici
@@ -22,9 +25,8 @@ const Possessions = () => {
             })
             .catch(error => {
                 console.error('Error fetching data:', error);
-                setError(error.message);
             });
-    }, [nom]);
+    };
 
     const handleDateSubmit = (date) => {
         setSelectedDate(date);
@@ -43,7 +45,6 @@ const Possessions = () => {
         });
         setPossessions(updatedData);
     };
-
 
     function calculateValue(possession) {
         const dateToUse = selectedDate ? new Date(selectedDate) : new Date();
@@ -73,9 +74,8 @@ const Possessions = () => {
     const handleDelete = (nom, id) => {
         axios.delete(`http://localhost:5000/possession/${nom}/${id}`)
             .then(response => {
-                console.log(possessions);
-
-                setPossessions(possessions.filter(possession => possession.id !== id));
+                console.log('Deleted possession:', response.data);
+                fetchPossessions(); // Recharger les données après suppression
             })
             .catch(error => {
                 console.error('Erreur réseau:', error);
@@ -86,7 +86,7 @@ const Possessions = () => {
         <div className='vw-100 vh-100 overflow-x-hidden'>
             <div>
                 <h2>Possessions de {nom}</h2>
-                <button><Link to={`/`}>retour</Link> </button>
+                <button><Link to={`/`}>retour</Link></button>
             </div>
             <div>
                 <Table className='w-75 mt-5 table table-bordered'>
@@ -115,15 +115,10 @@ const Possessions = () => {
                                 <td className='d-flex flex-row gap-2'>
                                     <PossessionModal
                                         possession={possession}
-                                        onUpdate={(updatedPossession) => {
-                                            console.log("Before update:", possessions);
-                                            const updatedList = possessions.map(p => p.id === updatedPossession.id ? updatedPossession : p);
-                                            console.log("Updated possession:", updatedPossession);
-                                            setPossessions(updatedList);
-                                            console.log("After update:", updatedList);
-                                        }}
+                                        onUpdate={() => fetchPossessions()} // Recharger les données après mise à jour
                                     />
-                                    <button className='btn btn-danger' type="button" onClick={() => handleDelete(possession.possesseur.nom, possession.id)}>supprimer</button></td>
+                                    <button className='btn btn-danger' type="button" onClick={() => handleDelete(possession.possesseur.nom, possession.id)}>supprimer</button>
+                                </td>
                             </tr>
                         ))}
                     </tbody>
@@ -139,4 +134,3 @@ const Possessions = () => {
 }
 
 export default Possessions;
-

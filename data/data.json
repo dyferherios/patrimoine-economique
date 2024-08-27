@@ -19,7 +19,7 @@
           },
           "type": "BienMateriel",
           "libelle": "MacBook Pro",
-          "valeur": "5000000",
+          "valeur": "6000000",
           "dateDebut": "2023-12-25T00:00:00.000Z",
           "dateFin": null,
           "tauxAmortissement": 5
@@ -36,7 +36,7 @@
           "dateFin": null,
           "tauxAmortissement": null,
           "jour": 1,
-          "valeurConstante": 500000
+          "valeurConstante": "500000"
         },
         {
           "id": 3,
