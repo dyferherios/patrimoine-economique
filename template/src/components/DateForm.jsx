@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
+import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 
 const DateForm = ({ onDateSubmit }) => {
     const [selectedDate, setSelectedDate] = useState('');
@@ -16,9 +16,9 @@ const DateForm = ({ onDateSubmit }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit} className='w-50 h-50'>
+        <form onSubmit={handleSubmit} className='w-50 mb-5 border'>
             <div className='mt-5 mb-2 d-flex flex-row justify-content-center gap-2 align-items-center'>
-                <label htmlFor="dateInput">Select a Date: </label>
+                <label htmlFor="dateInput">Selectionner votre date : </label>
                 <input className='form-control form-control-md w-50'
                     type="date"
                     id="dateInput"
