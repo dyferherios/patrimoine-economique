@@ -51,6 +51,43 @@ app.get('/possessions', (req, res) => {
     });
 });
 
+
+app.put('/possession/:nom/:id', (req, res) => {
+    const { nom, id } = req.params;
+    const updatedPossession = req.body;
+    const parsedId = parseInt(id);
+
+    fs.readFile(path, "utf8", (err, data) => {
+        if (err) {
+            return res.status(500).send("Error reading file");
+        }
+
+        let jsonData = JSON.parse(data);
+        const patrimoine = jsonData.find(item => item.model === "Patrimoine");
+
+        // Rechercher et mettre à jour la possession correspondante
+        let possessionFound = false;
+        patrimoine.data.possessions = patrimoine.data.possessions.map(possession => {
+            if (possession.possesseur.nom === nom && possession.id === parsedId) {
+                possessionFound = true;
+                return { ...possession, ...updatedPossession }; // Mettre à jour avec les nouvelles données
+            }
+            return possession;
+        });
+
+        if (!possessionFound) {
+            return res.status(404).send("Possession not found");
+        }
+
+        fs.writeFile(path, JSON.stringify(jsonData, null, 2), (err) => {
+            if (err) {
+                return res.status(500).send("Error writing file");
+            }
+            res.status(200).send("Possession mise à jour avec succès");
+        });
+    });
+});
+
 app.delete('/possession/:nom/:id', (req, res) => {
     const { nom, id } = req.params;
     console.log(nom, id);
@@ -66,8 +103,6 @@ app.delete('/possession/:nom/:id', (req, res) => {
         patrimoine.data.possessions = patrimoine.data.possessions.filter(
             possession => !(possession.possesseur.nom === nom && possession.id === parsedId)
         );
-        console.log(id);
-        
         fs.writeFile(path, JSON.stringify(jsonData, null, 2), (err) => {
             if (err) {
                 return res.status(500).send("Error writing file");
@@ -76,6 +111,7 @@ app.delete('/possession/:nom/:id', (req, res) => {
         });
     });
 });
+
 
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);

@@ -6,7 +6,8 @@ import DateForm from './DateForm';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Possession from "../../../models/possessions/Possession.js";
 import Flux from "../../../models/possessions/Flux.js";
-import { Button } from 'bootstrap';
+import { Link } from 'react-router-dom';
+import PossessionModal from './PossessionModal.jsx';
 
 const Possessions = () => {
     const { nom } = useParams(); // Récupère le nom du possesseur depuis l'URL
@@ -43,7 +44,7 @@ const Possessions = () => {
         setPossessions(updatedData);
     };
 
-    
+
     function calculateValue(possession) {
         const dateToUse = selectedDate ? new Date(selectedDate) : new Date();
         if (possession.type === "BienMateriel") {
@@ -73,51 +74,60 @@ const Possessions = () => {
         axios.delete(`http://localhost:5000/possession/${nom}/${id}`)
             .then(response => {
                 console.log(possessions);
-                
+
                 setPossessions(possessions.filter(possession => possession.id !== id));
             })
             .catch(error => {
                 console.error('Erreur réseau:', error);
             });
     };
-    
+
     return (
         <div className='vw-100 vh-100 overflow-x-hidden'>
             <div>
                 <h2>Possessions de {nom}</h2>
-                <button>retour </button>
+                <button><Link to={`/`}>retour</Link> </button>
             </div>
             <div>
-            <Table className='w-75 mt-5 table table-bordered'>
-                <thead className='table-primary'>
-                    <tr className='text-center'>
-                        <th>Libelle</th>
-                        <th>Valeur</th>
-                        <th>Date Debut</th>
-                        <th>Date Fin</th>
-                        <th>Taux d'Amortissement</th>
-                        <th>Valeur Actuelle</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody className='table-secondary'>
-                    {possessions.map((possession, index) => (
-                        <tr key={index} className='text-center'>
-                            <td>{possession.libelle}</td>
-                            <td>{possession.valeur !== 0 ? possession.valeur : possession.valeurConstante < 0 ? possession.valeurConstante * -1 : possession.valeurConstante}</td>
-                            <td>{new Date(possession.dateDebut).toLocaleDateString()}</td>
-                            <td>{possession.dateFin ? new Date(possession.dateFin).toLocaleDateString() : new Date(Date.now()).toLocaleDateString() }</td>
-                            <td>{possession.tauxAmortissement !== null ? `${possession.tauxAmortissement}%` : "0%"}</td>
-                            <td>
-                                {calculateValue(possession) < 0 ? calculateValue(possession).toFixed(2) * -1 : calculateValue(possession).toFixed(2)}
-                            </td>
-                            <td className='d-flex flex-row gap-2'>
-                                <button className='btn btn-primary' type="button">modifier</button>
-                                <button className='btn btn-danger' type="button" onClick={()=>handleDelete(possession.possesseur.nom,possession.id)}>supprimer</button></td>
+                <Table className='w-75 mt-5 table table-bordered'>
+                    <thead className='table-primary'>
+                        <tr className='text-center'>
+                            <th>Libelle</th>
+                            <th>Valeur</th>
+                            <th>Date Debut</th>
+                            <th>Date Fin</th>
+                            <th>Taux d'Amortissement</th>
+                            <th>Valeur Actuelle</th>
+                            <th>Action</th>
                         </tr>
-                    ))}
-                </tbody>
-            </Table>
+                    </thead>
+                    <tbody className='table-secondary'>
+                        {possessions.map((possession, index) => (
+                            <tr key={index} className='text-center'>
+                                <td>{possession.libelle}</td>
+                                <td>{possession.valeur !== 0 ? possession.valeur : possession.valeurConstante < 0 ? possession.valeurConstante * -1 : possession.valeurConstante}</td>
+                                <td>{new Date(possession.dateDebut).toLocaleDateString()}</td>
+                                <td>{possession.dateFin ? new Date(possession.dateFin).toLocaleDateString() : new Date(Date.now()).toLocaleDateString()}</td>
+                                <td>{possession.tauxAmortissement !== null ? `${possession.tauxAmortissement}%` : "0%"}</td>
+                                <td>
+                                    {calculateValue(possession) < 0 ? calculateValue(possession).toFixed(2) * -1 : calculateValue(possession).toFixed(2)}
+                                </td>
+                                <td className='d-flex flex-row gap-2'>
+                                    <PossessionModal
+                                        possession={possession}
+                                        onUpdate={(updatedPossession) => {
+                                            console.log("Before update:", possessions);
+                                            const updatedList = possessions.map(p => p.id === updatedPossession.id ? updatedPossession : p);
+                                            console.log("Updated possession:", updatedPossession);
+                                            setPossessions(updatedList);
+                                            console.log("After update:", updatedList);
+                                        }}
+                                    />
+                                    <button className='btn btn-danger' type="button" onClick={() => handleDelete(possession.possesseur.nom, possession.id)}>supprimer</button></td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </Table>
             </div>
 
             <DateForm onDateSubmit={handleDateSubmit} />

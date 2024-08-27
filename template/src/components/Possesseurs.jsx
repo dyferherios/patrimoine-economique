@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Table } from 'react-bootstrap';
-import { Link } from 'react-router-dom'; // Importez Link pour la navigation
-import '../../node_modules/bootstrap/dist/css/bootstrap.css';
+import { Link } from 'react-router-dom';
 
 const Possesseurs = () => {
     const [possesseurs, setPossesseurs] = useState([]);
@@ -27,13 +26,24 @@ const Possesseurs = () => {
                 <thead className='table-primary'>
                     <tr className='text-center'>
                         <th>Possesseur</th>
+                        <th>Possessions</th>
+                        <th>Chart</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody className='table-secondary'>
-                    {possesseurs.map((item, index) => (
+                    {possesseurs.map((possesseur, index) => (
                         <tr key={index} className='text-center'>
                             <td>
-                                <Link to={`/possessions/${item.data.nom}`}>{item.data.nom}</Link>
+                                <Link >{possesseur.data.nom}</Link>
+                            </td>
+                            <td>
+                                <Link to={`/possessions/${possesseur.data.nom}`}>regarder</Link>
+                            </td>
+                            <td> <Link>regarder</Link> </td>
+                            <td className=''>
+                                <button className='btn btn-primary' type="button">modifier</button>
+                                <button className='btn btn-danger' type="button">supprimer</button>
                             </td>
                         </tr>
                     ))}
