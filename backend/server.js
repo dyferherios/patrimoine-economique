@@ -1,13 +1,12 @@
 import express from 'express';
-import cors from 'cors';  // Assurez-vous que cette ligne est correcte
+import cors from 'cors'; 
 import fs from 'node:fs';
 
 const app = express();
 const port = 5000;
 
-// Middleware pour le parsing du JSON
 app.use(express.json());
-app.use(cors()); // Ajoutez ce middleware pour gérer les CORS
+app.use(cors()); 
 
 const path = "../data/data.json";
 
@@ -64,13 +63,11 @@ app.put('/possession/:nom/:id', (req, res) => {
 
         let jsonData = JSON.parse(data);
         const patrimoine = jsonData.find(item => item.model === "Patrimoine");
-
-        // Rechercher et mettre à jour la possession correspondante
         let possessionFound = false;
         patrimoine.data.possessions = patrimoine.data.possessions.map(possession => {
             if (possession.possesseur.nom === nom && possession.id === parsedId) {
                 possessionFound = true;
-                return { ...possession, ...updatedPossession }; // Mettre à jour avec les nouvelles données
+                return { ...possession, ...updatedPossession };
             }
             return possession;
         });
@@ -89,11 +86,8 @@ app.put('/possession/:nom/:id', (req, res) => {
 });
 
 app.delete('/possession/:nom/:id', (req, res) => {
-    const { nom, id } = req.params;
-    console.log(nom, id);
-    
+    const { nom, id } = req.params;   
     const parsedId = parseInt(id);
-
     fs.readFile(path, "utf8", (err, data) => {
         if (err) {
             return res.status(500).send("Error reading file");
@@ -111,6 +105,31 @@ app.delete('/possession/:nom/:id', (req, res) => {
         });
     });
 });
+
+app.post('/possession/:nom', (req, res) => {
+    const newPossession = req.body;
+    const { nom } = req.params;
+
+    fs.readFile(path, "utf8", (err, data) => {
+        if (err) return res.status(500).send("Error reading file");
+
+        let jsonData = JSON.parse(data);
+        const patrimoine = jsonData.find(item => item.model === "Patrimoine");
+        
+        if (!patrimoine) {
+            return res.status(404).send("Patrimoine not found");
+        }
+
+        const newId = patrimoine.data.possessions.length+1;
+        const possessionWithId = { id: newId, ...newPossession};
+        patrimoine.data.possessions.push(possessionWithId);
+        fs.writeFile(path, JSON.stringify(jsonData, null, 2), (err) => {
+            if (err) return res.status(500).send("Error writing file");
+            res.status(201).send("Possession ajoutée avec succès");
+        });
+    });
+});
+
 
 
 app.listen(port, () => {

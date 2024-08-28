@@ -10,11 +10,9 @@ const Possesseurs = () => {
     useEffect(() => {
         axios.get('http://localhost:5000/possesseur')
             .then(response => {
-                console.log('Fetched data:', response.data); // Vérifie la structure ici
                 setPossesseurs(response.data);
             })
             .catch(error => {
-                console.error('Error fetching data:', error);
                 setError(error.message);
             });
     }, []);

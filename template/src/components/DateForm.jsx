@@ -26,7 +26,7 @@ const DateForm = ({ onDateSubmit }) => {
                     onChange={handleDateChange}
                     required
                 />
-                <button type="submit" className='btn btn-primary'>Apply</button>
+                <button type="submit" className='btn btn-primary'>Appliquer</button>
             </div>
         </form>
     );

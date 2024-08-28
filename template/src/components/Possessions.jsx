@@ -7,11 +7,14 @@ import DateForm from './DateForm';
 import Possession from "../../../models/possessions/Possession.js";
 import Flux from "../../../models/possessions/Flux.js";
 import PossessionModal from './PossessionModal.jsx';
+import AddPossessionModal from './AddPossessionModal.jsx';
 
 const Possessions = () => {
-    const { nom } = useParams(); // Récupère le nom du possesseur depuis l'URL
+    const { nom } = useParams();
     const [possessions, setPossessions] = useState([]);
     const [selectedDate, setSelectedDate] = useState(null);
+    const [showAddModal, setShowAddModal] = useState(false);
+
 
     useEffect(() => {
         fetchPossessions();
@@ -20,7 +23,7 @@ const Possessions = () => {
     const fetchPossessions = () => {
         axios.get(`http://localhost:5000/possessions/${nom}`)
             .then(response => {
-                console.log('Fetched data:', response.data); // Vérifie la structure ici
+                console.log('Fetched data:', response.data);
                 setPossessions(response.data);
             })
             .catch(error => {
@@ -47,7 +50,7 @@ const Possessions = () => {
     };
 
     function calculateValue(possession) {
-        const dateToUse = selectedDate ? new Date(selectedDate) : new Date();
+        const dateToUse = selectedDate ? new Date(selectedDate) : new Date(Date.now());
         if (possession.type === "BienMateriel") {
             const newPossession = new Possession(
                 possession.possesseur,
@@ -75,7 +78,7 @@ const Possessions = () => {
         axios.delete(`http://localhost:5000/possession/${nom}/${id}`)
             .then(response => {
                 console.log('Deleted possession:', response.data);
-                fetchPossessions(); // Recharger les données après suppression
+                fetchPossessions();
             })
             .catch(error => {
                 console.error('Erreur réseau:', error);
@@ -87,6 +90,12 @@ const Possessions = () => {
             <div>
                 <h2>Possessions de {nom}</h2>
                 <button><Link to={`/`}>retour</Link></button>
+                <button className='btn btn-primary' onClick={() => setShowAddModal(true)}>ajouter</button>
+                <AddPossessionModal
+                    show={showAddModal}
+                    handleClose={() => {setShowAddModal(false), fetchPossessions()}}
+                />
+
             </div>
             <div>
                 <Table className='w-75 mt-5 table table-bordered'>
@@ -115,7 +124,7 @@ const Possessions = () => {
                                 <td className='d-flex flex-row gap-2'>
                                     <PossessionModal
                                         possession={possession}
-                                        onUpdate={() => fetchPossessions()} // Recharger les données après mise à jour
+                                        onUpdate={() => fetchPossessions()}
                                     />
                                     <button className='btn btn-danger' type="button" onClick={() => handleDelete(possession.possesseur.nom, possession.id)}>supprimer</button>
                                 </td>
