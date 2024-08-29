@@ -10,13 +10,6 @@ app.use(cors());
 
 const path = "../data/data.json";
 
-app.get('/possession', (req, res) => {
-    fs.readFile(path, "utf8", (err, data) => {
-        if (err) throw err;
-        res.send(JSON.parse(data));
-    });
-});
-
 app.get('/possesseur', (req, res) => {
     fs.readFile(path, "utf8", (err, data) => {
         if (err) throw err;
@@ -41,14 +34,17 @@ app.get('/possessions/:nom', (req, res) => {
 });
 
 
-app.get('/possessions', (req, res) => {
-    fs.readFile(path, "utf8", (err, data) => {
-        if (err) throw err;
-        const jsonData = JSON.parse(data);
-        const patrimoineData = jsonData.filter(data => data.model === "Patrimoine");
-        res.send(patrimoineData);
-    });
-});
+// app.get('/possessions', (req, res) => {
+//     fs.readFile(path, "utf8", (err, data) => {
+//         if (err) throw err;
+//         const jsonData = JSON.parse(data);
+//         const patrimoineData = jsonData.filter(data => data.model === "Patrimoine");
+//         res.send(patrimoineData);
+//     });
+// });
+
+
+
 
 
 app.put('/possession/:nom/:id', (req, res) => {
