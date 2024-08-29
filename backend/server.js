@@ -106,6 +106,7 @@ app.delete('/possession/:nom/:id', (req, res) => {
     });
 });
 
+
 app.post('/possession/:nom', (req, res) => {
     const newPossession = req.body;
     const { nom } = req.params;
@@ -130,6 +131,44 @@ app.post('/possession/:nom', (req, res) => {
     });
 });
 
+app.post('/possession/:nom/:id/close', (req, res) => {
+    const { nom, id } = req.params;
+    const parsedId = parseInt(id);
+    const currentDate = new Date().toISOString(); // Get the current date
+
+    fs.readFile(path, "utf8", (err, data) => {
+        if (err) {
+            return res.status(500).send("Error reading file");
+        }
+
+        let jsonData = JSON.parse(data);
+        const patrimoine = jsonData.find(item => item.model === "Patrimoine");
+
+        if (!patrimoine) {
+            return res.status(404).send("Patrimoine not found");
+        }
+
+        let possessionFound = false;
+        patrimoine.data.possessions = patrimoine.data.possessions.map(possession => {
+            if (possession.possesseur.nom === nom && possession.id === parsedId) {
+                possessionFound = true;
+                return { ...possession, dateFin: currentDate }; // Update the dateFin to the current date
+            }
+            return possession;
+        });
+
+        if (!possessionFound) {
+            return res.status(404).send("Possession not found");
+        }
+
+        fs.writeFile(path, JSON.stringify(jsonData, null, 2), (err) => {
+            if (err) {
+                return res.status(500).send("Error writing file");
+            }
+            res.status(200).send("Possession closed successfully");
+        });
+    });
+});
 
 
 app.listen(port, () => {

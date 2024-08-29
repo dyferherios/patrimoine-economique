@@ -13,46 +13,6 @@
       },
       "possessions": [
         {
-          "id": 1,
-          "possesseur": {
-            "nom": "John Doe"
-          },
-          "type": "BienMateriel",
-          "libelle": "MacBook Pro",
-          "valeur": 4000000,
-          "dateDebut": "2023-12-25T00:00:00.000Z",
-          "dateFin": null,
-          "tauxAmortissement": 5
-        },
-        {
-          "id": 2,
-          "possesseur": {
-            "nom": "John Doe"
-          },
-          "type": "Flux",
-          "libelle": "Alternance",
-          "valeur": 0,
-          "dateDebut": "2022-12-31T21:00:00.000Z",
-          "dateFin": null,
-          "tauxAmortissement": null,
-          "jour": 1,
-          "valeurConstante": 500000
-        },
-        {
-          "id": 3,
-          "possesseur": {
-            "nom": "John Doe"
-          },
-          "type": "Flux",
-          "libelle": "Survie",
-          "valeur": 0,
-          "dateDebut": "2022-12-31T21:00:00.000Z",
-          "dateFin": null,
-          "tauxAmortissement": null,
-          "jour": 2,
-          "valeurConstante": -300000
-        },
-        {
           "id": 4,
           "possesseur": {
             "nom": "John Doe"
@@ -73,7 +33,7 @@
           "libelle": "Alternance",
           "valeur": 0,
           "dateDebut": "2022-12-31T21:00:00.000Z",
-          "dateFin": null,
+          "dateFin": "2024-08-29T10:38:55.965Z",
           "tauxAmortissement": null,
           "jour": 1,
           "valeurConstante": "5000000"
@@ -87,10 +47,38 @@
           "libelle": "Survie",
           "valeur": 0,
           "dateDebut": "2022-12-31T21:00:00.000Z",
-          "dateFin": null,
+          "dateFin": "2024-08-29T10:38:57.129Z",
           "tauxAmortissement": null,
           "jour": 2,
           "valeurConstante": -300000
+        },
+        {
+          "id": 7,
+          "possesseur": {
+            "nom": "John Doe"
+          },
+          "type": "BienMateriel",
+          "libelle": "Maison",
+          "valeur": 1000000,
+          "dateDebut": "2024-08-28T00:00:00.000Z",
+          "dateFin": null,
+          "tauxAmortissement": 10,
+          "jour": null,
+          "valeurConstante": 0
+        },
+        {
+          "id": 5,
+          "possesseur": {
+            "nom": "John Doe"
+          },
+          "type": "Flux",
+          "libelle": "Frais",
+          "valeur": 0,
+          "dateDebut": "2024-08-28T00:00:00.000Z",
+          "dateFin": "2024-08-29T10:38:55.965Z",
+          "tauxAmortissement": null,
+          "jour": null,
+          "valeurConstante": 10000
         }
       ]
     }
