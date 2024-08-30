@@ -120,6 +120,7 @@ app.post('/possession/:nom', (req, res) => {
         const newId = patrimoine.data.possessions.length+1;
         const possessionWithId = { id: newId, ...newPossession};
         patrimoine.data.possessions.push(possessionWithId);
+        
         fs.writeFile(path, JSON.stringify(jsonData, null, 2), (err) => {
             if (err) return res.status(500).send("Error writing file");
             res.status(201).send("Possession ajoutée avec succès");

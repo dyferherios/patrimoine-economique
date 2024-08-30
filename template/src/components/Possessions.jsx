@@ -1,4 +1,4 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
+import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams, Link } from 'react-router-dom';
@@ -59,7 +59,6 @@ const Possessions = () => {
             });
     };
 
-
     function calculateValue(possession) {
         const dateToUse = selectedDate ? new Date(selectedDate) : new Date(Date.now());
         if (possession.type === "BienMateriel") {
@@ -97,18 +96,21 @@ const Possessions = () => {
     };
 
     return (
-        <div className='vw-100 vh-100 overflow-x-hidden'>
-            <div>
-                <h2>Possessions de {nom}</h2>
-                <button><Link to={`/`}>retour</Link></button>
+        <div className='vw-100 vh-100 d-flex flex-column align-items-center mt-5'>
+            <div className='d-flex justify-content-center align-items-center align-items-center gap-5 position-fixed top-25 start-50 translate-middle bg-white p-2 z-1' style={{ width: '100%', height: '100px' }}>
+                <h2 className='text-center'>Possessions de {nom}</h2>
                 <button className='btn btn-primary' onClick={() => setShowAddModal(true)}>ajouter</button>
                 <AddPossessionModal
                     show={showAddModal}
                     handleClose={() => { setShowAddModal(false); fetchPossessions(); }}
                 />
+                <DateForm onDateSubmit={handleDateSubmit} />
+                <div className='mt-3 w-50 p-2'>
+                    <h4><strong>Valeur totale actuelle : </strong>{selectedDate == null ? "0.00" : calculateTotalValeurActuelle().toFixed(2)}</h4>
+                </div>
             </div>
-            <div>
-                <Table className='w-75 mt-5 table table-bordered'>
+            <div className='d-flex flex-column align-items-center vw-100 p-2'>
+                <Table className='w-100 mt-5 table table-bordered'>
                     <thead className='table-primary'>
                         <tr className='text-center'>
                             <th>Libelle</th>
@@ -120,7 +122,7 @@ const Possessions = () => {
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody className='table-secondary'>
+                    <tbody className='table-secondary w-100'>
                         {possessions.map((possession, index) => (
                             <tr key={index} className='text-center'>
                                 <td>{possession.libelle}</td>
@@ -145,10 +147,7 @@ const Possessions = () => {
                 </Table>
             </div>
 
-            <DateForm onDateSubmit={handleDateSubmit} />
-            <div className='mt-3 w-50 border p-2'>
-                <h4><strong>Valeur totale actuelle : </strong>{selectedDate == null ? "0.00" : calculateTotalValeurActuelle().toFixed(2)}</h4>
-            </div>
+            
         </div>
     );
 }
