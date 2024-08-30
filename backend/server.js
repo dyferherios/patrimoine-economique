@@ -19,6 +19,8 @@ app.get('/possesseur', (req, res) => {
     });
 });
 
+
+
 app.get('/possessions/:nom', (req, res) => {
     const { nom } = req.params;
     fs.readFile(path, "utf8", (err, data) => {
@@ -28,23 +30,9 @@ app.get('/possessions/:nom', (req, res) => {
             .filter(item => item.model === "Patrimoine")
             .flatMap(item => item.data.possessions)
             .filter(possession => possession.possesseur.nom === nom);
-        console.log(possessions); 
         res.send(possessions);
     });
 });
-
-
-// app.get('/possessions', (req, res) => {
-//     fs.readFile(path, "utf8", (err, data) => {
-//         if (err) throw err;
-//         const jsonData = JSON.parse(data);
-//         const patrimoineData = jsonData.filter(data => data.model === "Patrimoine");
-//         res.send(patrimoineData);
-//     });
-// });
-
-
-
 
 
 app.put('/possession/:nom/:id', (req, res) => {

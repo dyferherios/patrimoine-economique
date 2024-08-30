@@ -61,23 +61,6 @@ const PossessionsChart = () => {
         return possessions.reduce((sum, possession) => sum + calculateValue(possession, date), 0);
     };
 
-    // const generateDateRange = (startDate, endDate) => {
-    //     const dates = [];
-    //     const start = new Date(startDate);
-    //     const end = new Date(endDate);
-    //     let current = new Date(start);
-
-
-    //     while (current <= end) {
-    //         if (current.getDate() === new Date(dateDebut).getDate()) {
-    //             dates.push(new Date(current));
-    //         }
-    //         current.setMonth(current.getMonth() + 1);
-    //     }
-    //     console.log(dates);
-    //     return dates;
-    // };
-
     const generateDateRange = (startDate, endDate) => {
         const dates = [];
         const start = new Date(startDate);
@@ -90,29 +73,23 @@ const PossessionsChart = () => {
             dates.push(new Date(current));
             current.setMonth(current.getMonth() + 1);
             if (current.getDate() !== dayOfMonth) {
-                current.setDate(0); 
+                current.setDate(0);
                 if (current > end) break;
                 current.setDate(dayOfMonth);
             }
         }
 
-        console.log(dates);
         return dates;
     };
-
-
 
     const updateChartData = () => {
         if (dateDebut && dateFin) {
             const startDate = new Date(dateDebut);
             const endDate = new Date(dateFin);
             const dates = generateDateRange(startDate, endDate);
-            console.log("date", dates.length);
-
             const labels = dates.map(date => date.toLocaleDateString());
-            console.log(labels);
 
-            const values = dates.map(date => calculateTotalValeurActuelle(date).toFixed(2));
+            const values = dates.map(date => calculateTotalValeurActuelle(date));
 
             setChartData({
                 labels: labels,
@@ -128,56 +105,65 @@ const PossessionsChart = () => {
                 ]
             });
 
-            console.log("values", values.length);
-
-
-            const totalDebut = calculateTotalValeurActuelle(startDate);
-            const totalFin = calculateTotalValeurActuelle(endDate);
-
         }
     };
 
     const updateDateDebut = (date) => {
-        console.log(date);
         setDateDebut(date);
     };
 
     const updateDateFin = (date) => {
-        console.log(date);
         setDateFin(date);
     };
 
     return (
-        <div>
-            <h2>Valeur des possessions pour {nom}</h2>
-            <div className='border border-black d-flex flex-row'>
-                <DateForm onDateSubmit={updateDateDebut} />
-                <DateForm onDateSubmit={updateDateFin} />
+        <div className='d-flex flex-column align-items-center top-0 start-0 end-0' style={{ height: '70vh', width: '100%' }}>
+            <h2 className='text-center m-3'>Graphique du patrimoine de {nom}</h2>
+
+            <div className='d-flex flex-row justify-content-center align-items-center gap-5 mb-5' style={{ width: '100%', height: '50px' }}>
+                <div className='w-50 d-flex flex-row align-items-center justify-content-center border' style={{height:'50px'}} >
+                    <label htmlFor="" className=''>Date du debut</label>
+                    <DateForm onDateSubmit={updateDateDebut} />
+                </div>
+                <div className='w-50 d-flex flex-row align-items-center justify-content-center border' style={{height:'50px'}}>
+                    <label htmlFor="">Date de fin</label>
+                    <DateForm onDateSubmit={updateDateFin} />
+                </div>
+
             </div>
-            <Line data={chartData} options={{
-                scales: {
-                    x: {
-                        type: 'category',
-                        title: {
-                            display: true,
-                            text: 'Date'
-                        },
-                        ticks: {
-                            autoSkip: false,
-                            maxRotation: 45,
-                            minRotation: 45,
+
+            <div style={{ width: '100%', height: 'calc(90vh - 150px)' }}> {/* Ajustez la hauteur en fonction de vos besoins */}
+                <Line
+                    data={chartData}
+                    options={{
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            x: {
+                                type: 'category',
+                                title: {
+                                    display: true,
+                                    text: 'Date'
+                                },
+                                ticks: {
+                                    autoSkip: false,
+                                    maxRotation: 45,
+                                    minRotation: 45,
+                                }
+                            },
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Valeur'
+                                }
+                            }
                         }
-                    },
-                    y: {
-                        beginAtZero: true,
-                        title: {
-                            display: true,
-                            text: 'Valeur'
-                        }
-                    }
-                }
-            }} />
+                    }}
+                />
+            </div>
         </div>
+
     );
 };
 

@@ -97,7 +97,7 @@ const Possessions = () => {
 
     return (
         <div className='vw-100 vh-100 d-flex flex-column align-items-center mt-5'>
-            <div className='d-flex justify-content-center align-items-center align-items-center gap-5 position-fixed top-25 start-50 translate-middle bg-white p-2 z-1' style={{ width: '100%', height: '100px' }}>
+            <div className='d-flex justify-content-center align-items-center align-items-center gap-5 position-fixed top-25 start-50 translate-middle bg-white p-2' style={{ width: '100%', height: '100px' }}>
                 <h2 className='text-center'>Possessions de {nom}</h2>
                 <button className='btn btn-primary' onClick={() => setShowAddModal(true)}>ajouter</button>
                 <AddPossessionModal
@@ -105,9 +105,9 @@ const Possessions = () => {
                     handleClose={() => { setShowAddModal(false); fetchPossessions(); }}
                 />
                 <DateForm onDateSubmit={handleDateSubmit} />
-                <div className='mt-3 w-50 p-2'>
-                    <h4><strong>Valeur totale actuelle : </strong>{selectedDate == null ? "0.00" : calculateTotalValeurActuelle().toFixed(2)}</h4>
-                </div>
+            <div className='mt-3 w-50 p-2'>
+                <h4><strong>Valeur totale actuelle : </strong>{selectedDate == null ? "0.00" : calculateTotalValeurActuelle().toFixed(2)}</h4>
+            </div>
             </div>
             <div className='d-flex flex-column align-items-center vw-100 p-2'>
                 <Table className='w-100 mt-5 table table-bordered'>

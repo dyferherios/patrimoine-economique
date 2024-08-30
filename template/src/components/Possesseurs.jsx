@@ -7,7 +7,7 @@ import '../../../node_modules/bootstrap/dist/css/bootstrap.css';
 const Possesseurs = () => {
     const [possesseurs, setPossesseurs] = useState([]);
     const [error, setError] = useState(null);
-    const headers = ["Possesseur","Possessions","Chart","Action"]
+    const headers = ["Possesseur","Possessions","Graphique"]
     useEffect(() => {
         axios.get('http://localhost:5000/possesseur')
             .then(response => {
@@ -41,14 +41,10 @@ const Possesseurs = () => {
                                         {possesseur.data.nom}
                                     </td>
                                     <td className=''>
-                                        <Link to={`/possessions/${possesseur.data.nom}`}>Regarder</Link>
+                                        <Link to={`/possessions/${possesseur.data.nom}`}>Regarder les possessions</Link>
                                     </td>
                                     <td>
-                                        <Link to={`/possessions/${possesseur.data.nom}/chart`}>Voir le chart</Link>
-                                    </td>
-                                    <td className=''>
-                                        <button className='btn btn-primary' type="button">modifier</button>
-                                        <button className='btn btn-danger' type="button">supprimer</button>
+                                        <Link to={`/possessions/${possesseur.data.nom}/chart`}>Voir le graphe</Link>
                                     </td>
                                 </tr>
                             ))}
