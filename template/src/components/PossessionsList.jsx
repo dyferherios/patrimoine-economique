@@ -20,13 +20,13 @@ const PossessionsList = ({
     return (
         <div className='vw-100 vh-100 d-flex flex-column align-items-center mt-5'>
             <div className='d-flex justify-content-center align-items-center align-items-center gap-5 position-fixed top-25 start-50 translate-middle bg-white p-2' style={{ width: '100%', height: '100px' }}>
-                <h2 className='text-center'>Possessions de {nom}</h2>
+                <h2 className='text-center'>Possessions de John Doe</h2>
                 <button className='btn btn-primary' onClick={() => setShowAddModal(true)}>ajouter</button>
                 <AddPossessionModal
                     show={showAddModal}
                     handleClose={() => {
                         setShowAddModal(false);
-                        fetchPossessions(); // Rafraîchir la liste après l'ajout
+                        fetchPossessions();
                     }}
                 />
                 <DateForm onDateSubmit={handleDateSubmit} />

@@ -27,7 +27,7 @@ const PossessionsChart = () => {
     }, [possessions, dateDebut, dateFin]);
 
     const fetchPossessions = () => {
-        axios.get(`https://patrimoine-economique-api-abjt.onrender.com/possession/`)
+        axios.get(`${import.meta.env.VITE_URL_API}/possession/`)
             .then(response => {
                 console.log('Fetched data:', response.data);
                 setPossessions(response.data);
@@ -66,7 +66,7 @@ const PossessionsChart = () => {
             const labels = dates.map(date => date.toLocaleDateString());
 
             const values = dates.map(date => calculateTotalValeurActuelle(possessions, date));
-
+            
             setChartData({
                 labels: labels,
                 datasets: [
@@ -93,8 +93,8 @@ const PossessionsChart = () => {
     };
 
     return (
-        <div className='d-flex flex-column align-items-center top-0 start-0 end-0' style={{ height: '70vh', width: '100%' }}>
-            <h2 className='text-center m-3'>Graphique du patrimoine de {nom}</h2>
+        <div className='d-flex flex-column align-items-center top-0 start-0 end-0' style={{ height: 'auto', width: '100%' }}>
+            <h2 className='text-center m-3'>Graphique du patrimoine de John Doe</h2>
 
             <div className='d-flex flex-row justify-content-center align-items-center gap-5 mb-5' style={{ width: '100%', height: '50px' }}>
                 <div className='w-50 d-flex flex-row align-items-center justify-content-center' style={{height:'50px'}} >
@@ -108,7 +108,7 @@ const PossessionsChart = () => {
 
             </div>
 
-            <div style={{ width: '100%', height: 'calc(90vh - 150px)' }}> {/* Ajustez la hauteur en fonction de vos besoins */}
+            <div style={{ width: '100%', height: '100vh' }}> {/* Ajustez la hauteur en fonction de vos besoins */}
                 <Line
                     data={chartData}
                     options={{
@@ -128,7 +128,6 @@ const PossessionsChart = () => {
                                 }
                             },
                             y: {
-                                beginAtZero: true,
                                 title: {
                                     display: true,
                                     text: 'Valeur'

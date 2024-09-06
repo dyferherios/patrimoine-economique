@@ -11,7 +11,7 @@ function ModifyPossession() {
     const [possession, setPossession] = useState(null);
 
     useEffect(() => {
-        axios.get(`https://patrimoine-economique-api-abjt.onrender.com/possession/${id}`)
+        axios.get(`${import.meta.env.VITE_URL_API}/possession/${id}`)
             .then(response => {
                 setPossession(response.data);
             })
@@ -25,7 +25,7 @@ function ModifyPossession() {
     };
 
     const handleSave = () => {
-        axios.put(`http://localhost:5000/possession/${id}`, possession)
+        axios.put(`${import.meta.env.VITE_URL_API}/possession/${id}`, possession)
             .then(response => {
                 console.log('Update response:', response.data);
                 navigate('/possessions');

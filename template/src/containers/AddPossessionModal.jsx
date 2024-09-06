@@ -28,7 +28,7 @@ const AddPossessionModal = ({ show, handleClose }) => {
         };
 
         axios
-            .post(`https://patrimoine-economique-api-abjt.onrender.com/possession/`, newPossession)
+            .post(`${import.meta.env.VITE_URL_API}/possession/`, newPossession)
             .then(() => handleClose())
             .catch((error) => console.error('Erreur lors de l\'ajout de la possession:', error));
     };
