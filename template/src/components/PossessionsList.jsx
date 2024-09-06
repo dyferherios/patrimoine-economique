@@ -19,7 +19,7 @@ const PossessionsList = ({
 }) => {
     return (
         <div className='vw-100 vh-100 d-flex flex-column align-items-center mt-5'>
-            <div className='d-flex justify-content-center align-items-center align-items-center gap-5 position-fixed top-25 start-50 translate-middle bg-white p-2' style={{ width: '100%', height: '100px' }}>
+            <div className='d-flex justify-content-center align-items-center align-items-center gap-5 position-fixed top-25 start-50 translate-middle bg-white' style={{ width: '99%',marginLeft:'-0.5%' , height: '100px' }}>
                 <h2 className='text-center'>Possessions de John Doe</h2>
                 <button className='btn btn-primary' onClick={() => setShowAddModal(true)}>ajouter</button>
                 <AddPossessionModal
@@ -65,7 +65,7 @@ const PossessionsList = ({
                                     >
                                         Modifier
                                     </Link>
-                                    <button className='btn btn-secondary' onClick={() => handleClose(possession.libelle)}>fermer</button>
+                                    <button className='btn btn-success' onClick={() => handleClose(possession.libelle)}>fermer</button>
                                 </td>
                             </tr>
                         ))}

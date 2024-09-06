@@ -94,7 +94,7 @@ const PossessionsChart = () => {
 
     return (
         <div className='d-flex flex-column align-items-center top-0 start-0 end-0' style={{ height: 'auto', width: '100%' }}>
-            <h2 className='text-center m-3'>Graphique du patrimoine de John Doe</h2>
+            <h2 className='text-center m-5'>Graphique de la patrimoine de John Doe</h2>
 
             <div className='d-flex flex-row justify-content-center align-items-center gap-5 mb-5' style={{ width: '100%', height: '50px' }}>
                 <div className='w-50 d-flex flex-row align-items-center justify-content-center' style={{height:'50px'}} >
