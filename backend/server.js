@@ -8,7 +8,7 @@ const port = 5000;
 app.use(express.json());
 app.use(cors());
 
-const path = "../data/data.json";
+const path = "./data/data.json";
 app.get('/possession', (req, res) => {
     fs.readFile(path, "utf8", (err, data) => {
         if (err) return res.status(500).send("Error reading file");
