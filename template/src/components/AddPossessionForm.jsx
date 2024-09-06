@@ -1,46 +1,28 @@
-import React, { useState } from 'react';
+// AddPossessionForm.js
+import React from 'react';
 import { Modal, Form, Button } from 'react-bootstrap';
-import axios from 'axios';
-import { useParams } from 'react-router-dom';
 
-const AddPossessionModal = ({ show, handleClose }) => {
-    const [type, setType] = useState('');
-    const [libelle, setLibelle] = useState('');
-    const [valeur, setValeur] = useState('');
-    const [dateDebut, setDateDebut] = useState('');
-    const [dateFin, setDateFin] = useState('');
-    const [tauxAmortissement, setTauxAmortissement] = useState('');
-    const [valeurConstante, setValeurConstante] = useState('');
-    const [jour, setJour] = useState('');
-
-    const { nom } = useParams();
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        const newPossession = {
-            possesseur: {
-                nom
-            },
-            type,
-            libelle,
-            valeur: parseFloat(valeur) || 0,
-            dateDebut: new Date(dateDebut),
-            dateFin: dateFin ? new Date(dateFin) : null,
-            tauxAmortissement: parseFloat(tauxAmortissement) || null,
-            jour: parseInt(jour) || null,
-            valeurConstante: parseFloat(valeurConstante) || 0
-        };
-
-        axios.post(`http://localhost:5000/possession/${nom}`, newPossession)
-            .then(response => {
-                handleClose();
-            })
-            .catch(error => {
-                console.error('Erreur lors de l\'ajout de la possession:', error);
-            });
-    };
-
+const AddPossessionForm = ({
+    show,
+    handleClose,
+    type,
+    libelle,
+    valeur,
+    dateDebut,
+    dateFin,
+    tauxAmortissement,
+    valeurConstante,
+    jour,
+    setType,
+    setLibelle,
+    setValeur,
+    setDateDebut,
+    setDateFin,
+    setTauxAmortissement,
+    setValeurConstante,
+    setJour,
+    handleSubmit
+}) => {
     return (
         <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
@@ -48,7 +30,7 @@ const AddPossessionModal = ({ show, handleClose }) => {
             </Modal.Header>
             <Modal.Body>
                 <Form onSubmit={handleSubmit}>
-                <Form.Group controlId="formType">
+                    <Form.Group controlId="formType">
                         <Form.Label>Type</Form.Label>
                         <Form.Control
                             type="text"
@@ -121,5 +103,4 @@ const AddPossessionModal = ({ show, handleClose }) => {
     );
 };
 
-export default AddPossessionModal;
-
+export default AddPossessionForm;

@@ -9,12 +9,12 @@ function NavBar() {
     return (
         <Navbar className='bg-success' expand="lg" sticky="top">
             <Container >
-                <Navbar.Brand as={NavLink} to="/"  className="text-white">Patrimoine économique</Navbar.Brand>
+                <Navbar.Brand as={NavLink} to="/patrimoine/chart"  className="text-white">Patrimoine économique</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ms-auto w-50 d-flex flex-row justify-content-around" >
-                        <Nav.Link as={NavLink} to="/" end className=' text-white'>Accueil</Nav.Link>
-                        <Nav.Link as={NavLink} to="/possesseurs" className=' text-white'>Possesseurs</Nav.Link>
+                        <Nav.Link as={NavLink} to="/patrimoine/chart" end className=' text-white'>Accueil</Nav.Link>
+                        <Nav.Link as={NavLink} to="/possessions" className=' text-white'>Possessions</Nav.Link>
                     </Nav>
             </Navbar.Collapse>
             </Container>

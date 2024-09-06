@@ -3,7 +3,7 @@ import { Line } from 'react-chartjs-2';
 import axios from 'axios';
 import 'chart.js/auto';
 import { Link, useParams } from 'react-router-dom';
-import DateForm from './DateForm';
+import DateForm from './DateForm.jsx';
 import Possession from "../../../models/possessions/Possession.js";
 import Flux from "../../../models/possessions/Flux.js";
 
@@ -28,7 +28,7 @@ const PossessionsChart = () => {
     }, [possessions, dateDebut, dateFin]);
 
     const fetchPossessions = () => {
-        axios.get(`http://localhost:5000/possessions/${nom}`)
+        axios.get(`http://localhost:5000/possession/`)
             .then(response => {
                 console.log('Fetched data:', response.data);
                 setPossessions(response.data);
