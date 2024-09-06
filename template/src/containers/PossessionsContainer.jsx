@@ -53,17 +53,6 @@ const PossessionsContainer = () => {
             });
     };
 
-    const handleDelete = (libelle) => {
-        axios.delete(`http://localhost:5000/possession/${libelle}`)
-            .then(response => {
-                console.log('Deleted possession:', response.data);
-                fetchPossessions();
-            })
-            .catch(error => {
-                console.error('Erreur réseau:', error);
-            });
-    };
-
     return (
         <PossessionsList
             nom={nom}
@@ -73,7 +62,6 @@ const PossessionsContainer = () => {
             setShowAddModal={setShowAddModal}
             handleDateSubmit={handleDateSubmit}
             handleClose={handleClose}
-            handleDelete={handleDelete}
             fetchPossessions={fetchPossessions}
         />
     );

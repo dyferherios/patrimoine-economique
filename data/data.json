@@ -18,10 +18,10 @@
             "nom": "John Doe"
           },
           "type": "Bien matériel",
-          "libelle": "MacBook Pro latest",
-          "valeur": 4300000,
+          "libelle": "MacBook Pro",
+          "valeur": "4300000",
           "dateDebut": "2023-12-25T00:00:00.000Z",
-          "dateFin": "2024-09-06T08:16:47.990Z",
+          "dateFin": "2024-09-14",
           "tauxAmortissement": 5
         },
         {

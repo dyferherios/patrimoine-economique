@@ -6,6 +6,7 @@ import { Link, useParams } from 'react-router-dom';
 import DateForm from './DateForm.jsx';
 import Possession from "../../../models/possessions/Possession.js";
 import Flux from "../../../models/possessions/Flux.js";
+import {calculateTotalValeurActuelle} from '../containers/PossessionUtils';
 
 const PossessionsChart = () => {
     const { nom } = useParams();
@@ -38,29 +39,6 @@ const PossessionsChart = () => {
             });
     };
 
-    function calculateValue(possession, dateToUse) {
-        if (possession.type === "BienMateriel") {
-            const newPossession = new Possession(
-                possession.possesseur,
-                possession.libelle,
-                possession.valeur,
-                new Date(possession.dateDebut),
-                dateToUse,
-                possession.tauxAmortissement
-            );
-            return newPossession.getValeur(dateToUse);
-        }
-        if (possession.type === "Flux") {
-            const newFlux = new Flux(possession.possesseur, possession.libelle, possession.valeurConstante, new Date(possession.dateDebut), dateToUse, possession.tauxAmortissement, possession.jour);
-            return newFlux.getValeur(dateToUse);
-        }
-        return 0;
-    }
-
-    const calculateTotalValeurActuelle = (date) => {
-        return possessions.reduce((sum, possession) => sum + calculateValue(possession, date), 0);
-    };
-
     const generateDateRange = (startDate, endDate) => {
         const dates = [];
         const start = new Date(startDate);
@@ -89,7 +67,7 @@ const PossessionsChart = () => {
             const dates = generateDateRange(startDate, endDate);
             const labels = dates.map(date => date.toLocaleDateString());
 
-            const values = dates.map(date => calculateTotalValeurActuelle(date));
+            const values = dates.map(date => calculateTotalValeurActuelle(possessions, date));
 
             setChartData({
                 labels: labels,
@@ -121,11 +99,11 @@ const PossessionsChart = () => {
             <h2 className='text-center m-3'>Graphique du patrimoine de {nom}</h2>
 
             <div className='d-flex flex-row justify-content-center align-items-center gap-5 mb-5' style={{ width: '100%', height: '50px' }}>
-                <div className='w-50 d-flex flex-row align-items-center justify-content-center border' style={{height:'50px'}} >
+                <div className='w-50 d-flex flex-row align-items-center justify-content-center' style={{height:'50px'}} >
                     <label htmlFor="" className=''>Date du debut</label>
                     <DateForm onDateSubmit={updateDateDebut} />
                 </div>
-                <div className='w-50 d-flex flex-row align-items-center justify-content-center border' style={{height:'50px'}}>
+                <div className='w-50 d-flex flex-row align-items-center justify-content-center' style={{height:'50px'}}>
                     <label htmlFor="">Date de fin</label>
                     <DateForm onDateSubmit={updateDateFin} />
                 </div>

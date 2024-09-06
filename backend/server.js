@@ -50,22 +50,6 @@ app.put('/possession/:id', (req, res) => {
     });
 });
 
-
-app.delete('/possession/:libelle', (req, res) => {
-    const { libelle } = req.params;
-    fs.readFile(path, "utf8", (err, data) => {
-        let jsonData = JSON.parse(data);
-        const patrimoine = jsonData.find(item => item.model === "Patrimoine");
-        patrimoine.data.possessions = patrimoine.data.possessions.filter(
-            possession => !(possession.libelle === libelle)
-        );
-        fs.writeFile(path, JSON.stringify(jsonData, null, 2), (err) => {
-            res.status(200).send("Possession supprimée avec succès");
-        });
-    });
-});
-
-
 app.post('/possession/', (req, res) => {
     const newPossession = req.body;
     fs.readFile(path, "utf8", (err, data) => {

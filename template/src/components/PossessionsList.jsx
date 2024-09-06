@@ -15,7 +15,6 @@ const PossessionsList = ({
     setShowAddModal,
     handleDateSubmit,
     handleClose,
-    handleDelete,
     fetchPossessions
 }) => {
     return (
@@ -66,7 +65,6 @@ const PossessionsList = ({
                                     >
                                         Modifier
                                     </Link>
-                                    <button className='btn btn-danger' type="button" onClick={() => handleDelete(possession.libelle)}>supprimer</button>
                                     <button className='btn btn-secondary' onClick={() => handleClose(possession.libelle)}>fermer</button>
                                 </td>
                             </tr>
