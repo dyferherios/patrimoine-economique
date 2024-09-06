@@ -12,7 +12,7 @@ function HomePage() {
                     <h1 className="mb-4">Bienvenue sur Patrimoine économique</h1>
                     <p className="text-lg text-gray-600 mb-5">Construisez votre avenir financier avec confiance - Expertise, conseils et solutions sur mesure pour optimiser votre patrimoine.</p>
                     <Button className="btn-outline-warning" size="lg" style={{backgroundColor: 'yellow'}}>
-                        <Link to="/possesseurs" className="text-decoration-none fw-bold" style={{ color: 'black' }}>
+                        <Link to="/possessions" className="text-decoration-none fw-bold" style={{ color: 'black' }}>
                             Visiter
                         </Link>
                     </Button>

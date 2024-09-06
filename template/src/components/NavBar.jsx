@@ -13,7 +13,7 @@ function NavBar() {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ms-auto w-50 d-flex flex-row justify-content-around" >
-                        <Nav.Link as={NavLink} to="/patrimoine/chart" end className=' text-white'>Accueil</Nav.Link>
+                        <Nav.Link as={NavLink} to="/patrimoine/chart" end className=' text-white'>Graphique</Nav.Link>
                         <Nav.Link as={NavLink} to="/possessions" className=' text-white'>Possessions</Nav.Link>
                     </Nav>
             </Navbar.Collapse>
