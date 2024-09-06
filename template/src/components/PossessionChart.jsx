@@ -2,10 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
 import axios from 'axios';
 import 'chart.js/auto';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import DateForm from './DateForm.jsx';
-import Possession from "../../../models/possessions/Possession.js";
-import Flux from "../../../models/possessions/Flux.js";
 import {calculateTotalValeurActuelle} from '../containers/PossessionUtils';
 
 const PossessionsChart = () => {

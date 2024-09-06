@@ -2,7 +2,7 @@ import React from 'react';
 import { Table } from 'react-bootstrap';
 import DateForm from './DateForm';
 import AddPossessionModal from '../containers/AddPossessionModal';
-import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
 import { calculateValue, calculateTotalValeurActuelle} from '../containers/PossessionUtils';
 
