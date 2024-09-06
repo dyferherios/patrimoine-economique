@@ -33,10 +33,16 @@ const AddPossessionForm = ({
                     <Form.Group controlId="formType">
                         <Form.Label>Type</Form.Label>
                         <Form.Control
+                            as="select"
                             type="text"
                             value={type}
                             onChange={(e) => setType(e.target.value)}
-                        />
+                        >
+                            <option value="Flux">Flux</option>
+                            <option value="Argent">Argent</option>
+                            <option value="Bien matériel">Bien matériel</option>
+                        </Form.Control>
+
                     </Form.Group>
                     <Form.Group controlId="formLibelle">
                         <Form.Label>Libelle</Form.Label>
