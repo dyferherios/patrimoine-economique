@@ -1,7 +1,7 @@
 // AddPossessionModal.js
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 import AddPossessionForm from '../components/AddPossessionForm'; // Le composant "dumb"
 
 const AddPossessionModal = ({ show, handleClose }) => {
@@ -28,7 +28,7 @@ const AddPossessionModal = ({ show, handleClose }) => {
         };
 
         axios
-            .post(`http://localhost:5000/possession/`, newPossession)
+            .post(`https://patrimoine-economique-api-abjt.onrender.com/possession/`, newPossession)
             .then(() => handleClose())
             .catch((error) => console.error('Erreur lors de l\'ajout de la possession:', error));
     };

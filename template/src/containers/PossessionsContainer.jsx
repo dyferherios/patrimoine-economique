@@ -15,7 +15,7 @@ const PossessionsContainer = () => {
     }, [nom]);
 
     const fetchPossessions = () => {
-        axios.get(`http://localhost:5000/possession/`)
+        axios.get(`https://patrimoine-economique-api-abjt.onrender.com/possession/`)
             .then(response => {
                 setPossessions(response.data);
             })
@@ -43,7 +43,7 @@ const PossessionsContainer = () => {
     };
 
     const handleClose = (libelle) => {
-        axios.patch(`http://localhost:5000/possession/${libelle}/close`)
+        axios.patch(`https://patrimoine-economique-api-abjt.onrender.com/possession/${libelle}/close`)
             .then(response => {
                 console.log('Possession closed:', response.data);
                 fetchPossessions();

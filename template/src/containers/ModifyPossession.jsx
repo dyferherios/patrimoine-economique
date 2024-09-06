@@ -11,7 +11,7 @@ function ModifyPossession() {
     const [possession, setPossession] = useState(null);
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/possession/${id}`)
+        axios.get(`https://patrimoine-economique-api-abjt.onrender.com/possession/${id}`)
             .then(response => {
                 setPossession(response.data);
             })

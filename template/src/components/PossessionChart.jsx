@@ -27,7 +27,7 @@ const PossessionsChart = () => {
     }, [possessions, dateDebut, dateFin]);
 
     const fetchPossessions = () => {
-        axios.get(`http://localhost:5000/possession/`)
+        axios.get(`https://patrimoine-economique-api-abjt.onrender.com/possession/`)
             .then(response => {
                 console.log('Fetched data:', response.data);
                 setPossessions(response.data);
