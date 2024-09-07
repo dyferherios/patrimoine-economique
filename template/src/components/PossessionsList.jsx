@@ -57,7 +57,7 @@ const PossessionsList = ({
                                 <td>{possession.valeur !== 0 ? possession.valeur : possession.valeurConstante < 0 ? possession.valeurConstante * -1 : possession.valeurConstante}</td>
                                 <td>{new Date(possession.dateDebut).toLocaleDateString()}</td>
                                 <td>{possession.dateFin ? new Date(possession.dateFin).toLocaleDateString() : new Date(Date.now()).toLocaleDateString()}</td>
-                                <td>{possession.tauxAmortissement !== null ? `${possession.tauxAmortissement}%` : "0%"}</td>
+                                <td>{possession.tauxAmortissement == null ? "0%" : possession.tauxAmortissement < 0 ? `${possession.tauxAmortissement * -1}%` : `${possession.tauxAmortissement}%`}</td>
                                 <td>
                                     {calculateValue(possession, selectedDate) < 0 ? calculateValue(possession, selectedDate).toFixed(2) * -1 : calculateValue(possession, selectedDate).toFixed(2)}
                                 </td>

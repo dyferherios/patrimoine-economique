@@ -24,7 +24,7 @@ const DateFormContainer = ({ dateConfigs, onSubmit }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit} className='d-flex flex-row align-items-center w-75'>
+        <form onSubmit={handleSubmit} className='d-flex flex-row justify-content-center align-items-center w-75'>
             <div className='d-flex flex-row justify-content-center align-items-center' style={{ width: '100%' }}>
                 {dateConfigs.map(config => (
                     <DateInput
