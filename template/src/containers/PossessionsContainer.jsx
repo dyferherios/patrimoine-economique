@@ -24,10 +24,15 @@ const PossessionsContainer = () => {
             });
     };
 
-    const handleDateSubmit = (date) => {
-        setSelectedDate(date);
-        updateDateFin(date);
+    const dateConfigs = [
+        { id: 'endDate', label: 'Date de fin' }
+    ];
+
+    const handleDateSubmit = (dates) => {
+        updateDateFin(dates.endDate);
+        setSelectedDate(dates.endDate);
     };
+
 
     const updateDateFin = (date) => {
         const updatedData = possessions.map((possession) => {
@@ -55,7 +60,7 @@ const PossessionsContainer = () => {
 
     return (
         <PossessionsList
-            nom={nom}
+            dateConfigs={dateConfigs}
             possessions={possessions}
             selectedDate={selectedDate}
             showAddModal={showAddModal}

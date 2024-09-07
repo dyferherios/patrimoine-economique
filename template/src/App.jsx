@@ -5,7 +5,8 @@ import NavBar from './components/NavBar';
 import HomePage from './components/HomePage';
 import PossessionsContainer from './containers/PossessionsContainer';
 import ModifyPossession from './containers/ModifyPossession';
-import PossessionsChart from './components/PossessionChart';
+import PossessionChartContainer from './containers/PossessionChartContainer';
+
 
 const App = () => {
     return (
@@ -16,7 +17,7 @@ const App = () => {
                     <Route path="/" element={<HomePage />} />
                     <Route path="/possessions" element={<PossessionsContainer />} />
                     <Route path="/possessions/:libelle/:id" element={<ModifyPossession />} />
-                    <Route path="/patrimoine/chart" element={<PossessionsChart />} /> 
+                    <Route path="/patrimoine/chart" element={<PossessionChartContainer />} /> 
                 </Routes>
             </div>
         </Router>

@@ -5,10 +5,10 @@ import AddPossessionModal from '../containers/AddPossessionModal';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
 import { calculateValue, calculateTotalValeurActuelle} from '../containers/PossessionUtils';
-
+import DateFormContainer from '../containers/DateFormContainer';
 
 const PossessionsList = ({
-    nom,
+    dateConfigs,
     possessions,
     selectedDate,
     showAddModal,
@@ -29,7 +29,10 @@ const PossessionsList = ({
                         fetchPossessions();
                     }}
                 />
-                <DateForm onDateSubmit={handleDateSubmit} />
+                <DateFormContainer
+                    dateConfigs={dateConfigs}
+                    onSubmit={handleDateSubmit}
+                />
                 <div className='mt-3 w-50 p-2'>
                     <h4><strong>Valeur totale actuelle : </strong>{selectedDate == null ? "0.00" : calculateTotalValeurActuelle(possessions, selectedDate).toFixed(2)}</h4>
                 </div>
